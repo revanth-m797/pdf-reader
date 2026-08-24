@@ -21,3 +21,6 @@ A lightweight full-stack Python application that parses digital PDFs and applies
    ```bash
    streamlit run "app.py_file_path"
    ```
+
+### Demo of the app
+**https://pdf-reader101.streamlit.app/**
