@@ -11,25 +11,25 @@ load_dotenv()
 
 st.set_page_config(
     page_title="Document Summary Assistant",
-    page_icon="📄",
+    page_icon="",
     layout="centered"
 )
 
 st.markdown("""
     <style>
-    .main-header { font-size: 2.3rem; font-weight: 700; color: #1E3A8A; margin-bottom: 0.5rem; }
+    .main-header { font-size: 2.3rem; font-weight: 700; color: #800080; margin-bottom: 0.5rem; }
     .sub-header { font-size: 1.1rem; color: #4B5563; margin-bottom: 2rem; }
     footer {visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-header">📄 Document Summary Assistant</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header"> Document Summary Assistant</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Upload any digital PDF or scanned image to instantly extract data and generate smart summaries.</div>', unsafe_allow_html=True)
 
 key = os.getenv("api_key")
 
 if not key:
-    st.error("⚠️ API Key Missing: Please add 'GEMINI_API_KEY' to your local .env file or your Streamlit secrets dashboard.")
+    st.error("API Key Missing: Please add 'GEMINI_API_KEY' to your local .env file or your Streamlit secrets dashboard.")
     st.stop()
 else:
     ai = genai.Client(api_key=key)
@@ -40,7 +40,7 @@ def get_ocr():
 
 ocr = get_ocr()
 
-st.sidebar.header("🎯 Summary Settings")
+st.sidebar.header("Summary Settings")
 size = st.sidebar.select_slider(
     "Choose Summary Depth:",
     options=["Short", "Medium", "Long"],
@@ -49,7 +49,7 @@ size = st.sidebar.select_slider(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("💡 **Tech Stack:** Python, Streamlit, EasyOCR, Modern Google Gen AI SDK.")
+st.sidebar.info("**Tech Stack:** Python, Streamlit, EasyOCR, Modern Google Gen AI SDK.")
 
 file = st.file_uploader(
     "Drag and drop your file here or click browse", 
@@ -60,7 +60,7 @@ if file is not None:
     kind = file.type
     txt = ""
     
-    tab1, tab2 = st.tabs(["✨ Generated Summary", "🔍 Extracted Raw Text"])
+    tab1, tab2 = st.tabs(["Generated Summary", "Extracted Raw Text"])
 
     with st.spinner("Extracting content from file... Please wait."):
         try:
@@ -114,7 +114,7 @@ if file is not None:
                     )
                     
                     st.success("Analysis Complete!")
-                    st.markdown("### 📝 Smart Document Summary")
+                    st.markdown("###Smart Document Summary")
                     st.markdown(res.text)
                     
                 except Exception as ex:
